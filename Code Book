@@ -1,0 +1,49 @@
+The file run_analysis.R will download, load the datasets, clean and tidy up the data and save the prepared data in a Text file 
+called TidyData.txt. 
+We follow the 5 instructions given to us in the "Peer-graded Assignment: Getting and Cleaning Data Course Project".
+
+1)Loading required libraries for cleaning and managing the data and Downloading the data. First we check if we have the file -
+  already in our working directory. If not we download it. 
+  We create 8 different Tables called:
+    -features (561 obs of 2 variables)
+    -activities (6 obs. of 2 variables)
+    -subject_test (2947 obs. of 1 variables)
+    -x_test (2947 obs. of 561 variables)
+    -y_test (2947 obs. of 561 variables)
+    -subject_train (7352 obs. of 1 variables)
+    -x_train (7352 obs. of 561 variables)
+    -y_train (7352 obs. of 1 variables)    
+  
+  Then Merges the training and the test sets to create one data set.
+  Merged from subject, y, x. In that respective order the M stands for Merged.
+    -MSubject (10299 obs. of 1 variable)
+    -MY (10299 obs. of 1 variable)
+    -MX (10299 obs. of 561 variable)
+    -MData (10299 obs. of 563 variable)
+  
+2)Extracts only the measurements on the mean and standard deviation for each measurement.
+  We use the select() function together with regular expressions. This was saved into MData2.
+    -MData2 (10299 obs. of 88 variable)
+ 
+3)Uses descriptive activity names to name the activities in the data set.
+   Here we merge the data from activities to change the numbers to their respective activity. MData3
+    -MData3 (10299 obs. of 88 variable)
+    
+4)Appropriately labels the data set with descriptive variable names. 
+  Here we use the function gsub() together with Regular expressions -
+  to find out the labels in the columns and rename them with Descriptive -
+  variable names. MData4
+    -MData4 (10299 obs. of 88 variable)
+    -code column in MData4 renamed into activities
+    -All Acc in column’s name replaced by Accelerometer
+    -All Gyro in column’s name replaced by Gyroscope
+    -All BodyBody in column’s name replaced by Body
+    -All Mag in column’s name replaced by Magnitude
+    -All start with character f in column’s name replaced by Frequency
+    -All start with character t in column’s name replaced by Time
+
+5)From the data set in step 4, creates a second, independent tidy data set 
+  with the average of each variable for each activity and each subject.
+  Here we use the functions group_by() and summarize_all().
+    -MData5 (180 obs. of 88 variable)
+    -TidyData.txt
